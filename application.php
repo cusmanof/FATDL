@@ -28,20 +28,11 @@ if (isset($_GET['workspace'])) {
             <span id="workspaceSelection"><label for="workspace">workspace</label> : <input type="text" id="workspace" disabled="disabled" value="<?php echo $workspace; ?>"/></span>
             <span class="separator">|</span>
             <a href="" id="save" class="action" title="save your modifications">save</a>
-        </div>
+         </div>
         <div id="helpMessageContainer">
             <div id="helpMessage">
                 <h2><img src="img/help.png" alt="help" />Another To-do List help</h2>
-                <p>This application allows you to manage your to-do lists.</p>
-                <p>You can <span class="highlight">create</span> new items by using the 'plus' icon or by a double-click inside one of the four areas.</p>
-                <p>To <span class="highlight">edit</span> an existant item or a category title, just use the 'edit' icon or double click on it, type your text and press the <tt>enter</tt> key to validate it or the <tt>escape</tt> key to cancel your modification.</p>
-                <p>You can <span class="highlight">move</span> your items by drag-and-dropping them from one area to another one.</p>
-                <p>You can also <span class="highlight">delete</span> an item by clicking on the 'delete' icon.</p>
-                <p>You may <span class="highlight">indent</span> an item by using the 'indent' icon. You could then use the 'remove indent' icon to un-indent it.</p>
-                <p>Hit the <span class="highlight">save</span> button if you want to save your modifications.</p>
-                <p>On Firefox, use shortcut <tt>Control</tt> + <tt>S</tt> to save.</p>
-                <p>Please also note that you can <span class="highlight">switch</span> between the <span class="perso">personal</span> or <span class="pro">professional</span> category.</p>
-                <p>You may close that message by hitting again the <span class="highlight">help</span> button.</p>
+                <p>To add a link use "{link|alias|http://google.com.au}" this will produce the following <a href="http://google.com.au">alias</a>.</p>
             </div>
         </div>
         <div id="messagebar">

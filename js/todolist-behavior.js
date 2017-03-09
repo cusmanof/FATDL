@@ -219,6 +219,7 @@ AnotherTodoList.swapCategory = function() {
  * Called when the workspace has changed !
  */
 AnotherTodoList.workspaceHasChanged = function() {
+        AnotherTodoList.save(null);
 	AnotherTodoList.hasTheWorkspaceChanged = true;
 	AnotherTodoList.display(i18n.workspaceHasChanged, "info");
 }
