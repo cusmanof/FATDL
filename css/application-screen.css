@@ -1,0 +1,211 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+p {
+	margin: 0.25em;
+}
+
+div.area h2 {
+	text-align: center;
+	margin-top: 0.25em;
+	line-height: 1.6em;
+}
+
+div.area h2.active {
+	display: visible;
+}
+
+div.area h2.inactive {
+	display: none;
+}
+
+#toolbar {
+	width: 100%;
+	padding: 0.2em 0 0.4em 0;
+	text-align: center;
+	border-bottom: 1px solid black;
+	background-color: #EEEEFF;
+}
+
+input#workspace {
+	background-color: #CCCCCC;
+}
+
+#messagebar {
+	width: 100%;
+	padding: 0.2em 0 0.2em 0;
+	border-bottom: 1px solid black;
+	background-color: #FFFFEE;
+	text-align: center;
+}
+
+#messagebar img {
+	margin-right: 0.2em;
+}
+
+.info {
+	color: green;
+}
+
+.error {
+	color: red;
+}
+
+.warning {
+	color: #CC3300;
+}
+
+a.action {
+	text-decoration: none;
+	padding: 0.1em;
+}
+
+a.action.disabled {
+	color: grey;
+	text-decoration: line-through;
+}
+
+.perso {
+	color: #550000;
+}
+
+.pro {
+	color: #000055;
+}
+
+.select.perso.active {
+	background-color: #FFCCCC;
+	border: 1px solid black;
+}
+
+.select.pro.active {
+	background-color: #EEFFFF;
+	border: 1px solid black;
+}
+
+.action.inactive {
+	background: none;
+	border: none;
+}
+
+ul {
+	padding-left: 1em;
+	margin: 0 0.5em 1.5em 1em;
+	list-style-type: square;
+	overflow: auto;
+	height: 18em;
+}
+
+li { 
+	margin-bottom: 0.2em;
+}
+
+li.inactive {
+	display: none;
+}
+
+li.active {
+	display: visible;
+	cursor: move;
+}
+
+li.sublist {
+	margin-left: 1em;
+}
+
+.area {
+	border: 1px solid #CCCCCC;
+	width: 48%;
+}
+
+.top {
+	margin-top: 1em;
+}
+
+.bottom {
+	margin-top: 1em;
+}
+
+.bottom .left {
+	clear: both;
+}
+
+.left {
+	margin-left: 1em;
+	float: left;
+}
+
+.right {
+	margin-right: 1em;
+	float: right;
+}
+
+#first {
+	background-color: #FFEEEE;
+}
+#second {
+	background-color: #EEFFEE;
+}
+#third {
+	background-color: #FFFFEE;
+}
+#fourth {
+	background-color: #EEFFFF;
+}
+
+#helpMessageContainer {
+	display: none;
+}
+
+#helpMessage, #helpMessage h2 {
+	text-align: left;	
+}
+
+#helpMessage tt {
+	font-size: 1.25em;
+}
+
+#helpMessage span.highlight {
+	background-color: #FFFFBB;
+	border: 1px solid orange;
+}
+
+.date {
+	position: absolute;
+	right: 1em;
+	color: grey;
+	font-size: small;
+}
+
+input.editable {
+	width: 85%;
+	height: 1.2em;
+	border: 1px solid black;
+	background-color: #FFFFDD;
+	color: black;
+}
+
+input.editable.H2 {
+	width: 80%;
+	height: 1em;
+	font-size: 1em;
+	text-align: center;
+}
+
+#areaActions {
+	position: absolute;
+	text-align: right;
+	width: 47.5%;
+	margin-top: 0.25em;
+}
+
+#itemActions, #editActions {
+	position: absolute;
+	margin-left: 0.5em;
+}
+
+#itemActions a, #areaActions a, #editActions a {
+	padding: 0;
+}

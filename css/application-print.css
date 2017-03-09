@@ -1,0 +1,46 @@
+body {
+	font-family: Garamond, serif;
+	font-size: 1em;
+}
+
+#showHelp, #help, #messagebar, #footer, #workspaceSelection, span.separator, #save, #trash, #helpMessageContainer {
+	display: none;
+}
+
+a.select {
+	float: right;
+	color: black;
+	padding: 0.2em;
+	border: 1px solid black;
+	text-decoration: none;
+	font-size: 1.2em;
+}
+
+h2 {
+	font-size: 1.1em;
+	margin: 0;
+	padding: 0;
+}
+
+ul {
+	list-style-type: square;
+	margin: 0.5em 0 1em 1em;
+	padding: 0;
+}
+
+li.sublist {
+	margin-left: 1em;
+	height: 1.3em;
+}
+
+.inactive {
+	display: none;
+}
+
+.active {
+	display: visible;
+}
+
+#areaActions, #itemActions {
+	display: none;
+}

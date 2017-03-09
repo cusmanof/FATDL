@@ -1,0 +1,26 @@
+/* IE can't handle properly position absolute on #areaActions, so fixing a bigger height & another hack to have more room between areas */
+div.area {
+	height: 22em;
+	width: 45%;
+	padding: 0.5em;
+}
+
+/* Avoid border on IE */
+.item { 
+	background: none;
+	border: none;
+}
+
+/* Avoid border on IE */
+h2.active { 
+	background: none;
+	border: none;
+}
+
+/* Put button on right */
+#areaActions {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
