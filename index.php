@@ -10,19 +10,6 @@
     <body>
         <div id="content">
             <h1>Another To-do List</h1>
-
-
-
-            <?php
-            require_once("php/db.inc.php");
-            echo '<form action="application.php" method="get">';
-            $ww = getWorkspaces();
-            echo "Workspaces : ";
-            foreach ($ww as $ws) {
-                echo ' <input  type="submit" name="workspace" value="' . $ws . '" /> ';
-            }
-            echo'</form>';
-            ?>
             <div id="sidebar">
                 <form action="application.php" method="get">
                     <fieldset id="workspaceSelection">
@@ -31,12 +18,25 @@
                         <input type="submit" value="new"/>
                     </fieldset>
                 </form>
-
+            </div>
+            <div id="footer">
+                    <div id="toolbar">
+                        <?php
+                        require_once("php/db.inc.php");
+                        echo '<form action="application.php" method="get">';
+                        $ww = getWorkspaces();
+                        echo "Workspaces : ";
+                        foreach ($ww as $ws) {
+                            echo ' <input style="width:5em" type="submit" name="workspace" value="' . $ws . '" /> ';
+                        }
+                        echo'</form>';
+                        ?>
+                    </div>
             </div>
             <?php
             require_once("footer.inc.php");
             ?>
-        </div>   
+        </div>  
     </body>
 </html>
 
