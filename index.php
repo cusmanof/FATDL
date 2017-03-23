@@ -14,24 +14,25 @@
                 <form action="application.php" method="get">
                     <fieldset id="workspaceSelection">
                         <legend>Create a workspace</legend>
+                        <p>To create a Public Workspace use "**workspace_name"</p>
                         <label for="workspace">Workspace</label> : <input type="text" name="workspace" id="workspace" value="" maxlength="8"/>
                         <input type="submit" value="new"/>
                     </fieldset>
                 </form>
             </div>
             <div id="footer">
-                    <div id="toolbar">
-                        <?php
-                        require_once("php/db.inc.php");
-                        echo '<form action="application.php" method="get">';
-                        $ww = getWorkspaces();
-                        echo "Workspaces : ";
-                        foreach ($ww as $ws) {
-                            echo ' <input style="width:5em" type="submit" name="workspace" value="' . $ws . '" /> ';
-                        }
-                        echo'</form>';
-                        ?>
-                    </div>
+                <div id="toolbar">
+                    <?php
+                    require_once("php/db.inc.php");
+                    echo '<form action="application.php" method="get">';
+                    $ww = getWorkspaces($user);
+                    echo "Workspaces : ";
+                    foreach ($ww as $ws) {
+                        echo ' <input style="width:5em" type="submit" name="workspace" value="' . $ws . '" /> ';
+                    }
+                    echo'</form>';
+                    ?>
+                </div>
             </div>
             <?php
             require_once("footer.inc.php");

@@ -14,6 +14,6 @@ i18n.errorMessageIfProblemWhileLoading = "No workspace has been defined. I can't
 i18n.error501DemoMode = "Application is in demo mode : you won't be able to save your data.";
 i18n.problemOnAjaxRequest = "Problem while loading workspace.";
 i18n.serverSent = "Server sent";
-i18n.noSelectedCategory = "AnotherTodoList.selectedCategory is null !";
+i18n.noUser = "AnotherTodoList.user is null !";
 i18n.errorWorkspaceNotFound = "That workspace wasn't found in database. You can hit the save button to create it.";
 i18n.askUserIfWorkspaceMustBeSaved = "Before you leave, should your modifications be saved ?";

@@ -8,20 +8,25 @@ $loadRequired = false;
 $linkDb = mysql_connect(DB_HOST, DB_USER, DB_PASS) or terminateWithError(500, "Can't connect to '" . DB_USER . "@" . DB_HOST . "'");
 
 mysql_select_db(DB_NAME) or terminateWithError(500, "Can't select database '" . DB_NAME . "'");
+$user = $_SERVER['REMOTE_USER'];
 
 /**
  * Save values in database.
  */
-function save($workspace, $selectedCategory, $list1, $list2, $list3, $list4) {
-    global $loadRequired, $linkDb;
-    $orig = $workspace;
-    if (empty($workspace) || empty($selectedCategory)) {
+function save($workspace, $list1, $list2, $list3, $list4) {
+    global  $user;
 
-        terminateWithError(500, "Parameter workspace and selectedCategory expected !");
+    if (empty($workspace)) {
+        terminateWithError(500, "Parameter workspace expected !");
     }
 
+    if (substr($workspace, 0, 2) === '**') {
+        $user = 'public';
+    }
     $workspace = prepSqlValue($workspace);
-    $selectedCategory = prepSqlValue($selectedCategory);
+    $user = prepSqlValue($user);
+    $where = "workspace = $workspace AND user = $user";
+
     $list1 = prepSqlValue(processLine(addslashes($list1)));
     $list2 = prepSqlValue(processLine(addslashes($list2)));
     $list3 = prepSqlValue(processLine(addslashes($list3)));
@@ -30,26 +35,26 @@ function save($workspace, $selectedCategory, $list1, $list2, $list3, $list4) {
     /*
      * Workspace
      */
-    $searchSql = "SELECT * FROM workspaces WHERE workspace = $workspace";
+    $searchSql = "SELECT * FROM workspaces WHERE $where";
     $searchResult = mysql_query($searchSql) or terminateWithError(500, "Error in SQL : " . $searchSql);
 
     if ($searchResult && mysql_num_rows($searchResult) == 1) {
 
-        $sqlWorkspace = "UPDATE `workspaces` SET selectedCategory = $selectedCategory WHERE workspace = $workspace";
-        $sqlList1 = "UPDATE `lists` SET content = $list1 WHERE workspace = $workspace AND id = 0";
-        $sqlList2 = "UPDATE `lists` SET content = $list2 WHERE workspace = $workspace AND id = 1";
-        $sqlList3 = "UPDATE `lists` SET content = $list3 WHERE workspace = $workspace AND id = 2";
-        $sqlList4 = "UPDATE `lists` SET content = $list4 WHERE workspace = $workspace AND id = 3";
+        $sqlWorkspace = "UPDATE `workspaces` SET user = $user WHERE $where";
+        $sqlList1 = "UPDATE `lists` SET content = $list1 WHERE $where AND id = 0";
+        $sqlList2 = "UPDATE `lists` SET content = $list2 WHERE $where AND id = 1";
+        $sqlList3 = "UPDATE `lists` SET content = $list3 WHERE $where AND id = 2";
+        $sqlList4 = "UPDATE `lists` SET content = $list4 WHERE $where AND id = 3";
     } else if ($searchResult && mysql_num_rows($searchResult) > 1) {
 
         terminateWithError(500, "More than 1 row exists in database with that workspace name ! Some data may be corrupted !");
     } else {
 
-        $sqlWorkspace = "INSERT INTO `workspaces` (workspace, selectedCategory) VALUES ($workspace, $selectedCategory)";
-        $sqlList1 = "INSERT INTO `lists` (workspace, id, content) VALUES($workspace, 0, $list1)";
-        $sqlList2 = "INSERT INTO `lists` (workspace, id, content) VALUES($workspace, 1, $list2)";
-        $sqlList3 = "INSERT INTO `lists` (workspace, id, content) VALUES($workspace, 2, $list3)";
-        $sqlList4 = "INSERT INTO `lists` (workspace, id, content) VALUES($workspace, 3, $list4)";
+        $sqlWorkspace = "INSERT INTO `workspaces` (workspace, user) VALUES ($workspace, $user)";
+        $sqlList1 = "INSERT INTO `lists` (workspace, id, content, user) VALUES($workspace, 0, $list1, $user)";
+        $sqlList2 = "INSERT INTO `lists` (workspace, id, content, user) VALUES($workspace, 1, $list2, $user)";
+        $sqlList3 = "INSERT INTO `lists` (workspace, id, content, user) VALUES($workspace, 2, $list3, $user)";
+        $sqlList4 = "INSERT INTO `lists` (workspace, id, content, user) VALUES($workspace, 3, $list4, $user)";
     }
 
     mysql_free_result($searchResult);
@@ -58,11 +63,6 @@ function save($workspace, $selectedCategory, $list1, $list2, $list3, $list4) {
     mysql_query($sqlList2) or terminateWithError(500, "Error in SQL : " . $sqlList2);
     mysql_query($sqlList3) or terminateWithError(500, "Error in SQL : " . $sqlList3);
     mysql_query($sqlList4) or terminateWithError(500, "Error in SQL : " . $sqlList4);
-    mysql_close($linkDb);
-    if ($loadRequired) {
-         header( "location : ". $_SERVER['HTTP_REFERER'] );
-        die();
-    }
 }
 
 /*
@@ -70,24 +70,30 @@ function save($workspace, $selectedCategory, $list1, $list2, $list3, $list4) {
  */
 
 function getWorkspace($workspace) {
-    global $linkDb;
-    if (empty($workspace)) {
+    global $user;
 
-        terminateWithError(404, "Parameter workspace expected !");
+    if (substr($workspace, 0, 2) === '**') {
+        $user = 'public';
     }
 
+    if (empty($workspace)) {
+        terminateWithError(404, "Parameter workspace expected !");
+    }
     $workspace = prepSqlValue($workspace);
+    $user = prepSqlValue($user);
+    $where = "workspace = $workspace AND user = $user";
+
     $lists = array();
 
-    $searchSql = "SELECT * FROM workspaces WHERE workspace = $workspace";
+    $searchSql = "SELECT * FROM workspaces WHERE $where";
     $searchResult = mysql_query($searchSql) or terminateWithError(500, "Error in SQL : " . $searchSql);
 
     if ($searchResult && mysql_num_rows($searchResult) == 1) {
         if ($line = mysql_fetch_assoc($searchResult)) {
 
-            $selectedCategory = prepJSONValue($line['selectedCategory']);
+            $user = prepJSONValue($line['user']);
             {
-                $listSql = "SELECT * FROM lists WHERE workspace = $workspace ORDER BY id";
+                $listSql = "SELECT * FROM lists WHERE $where ORDER BY id";
                 $listResult = mysql_query($listSql) or terminateWithError(500, "Error in SQL : " . $listSql);
 
                 if ($listResult && mysql_num_rows($listResult) == 4) {
@@ -101,7 +107,7 @@ function getWorkspace($workspace) {
                 mysql_free_result($listResult);
             }
 
-            return "{ \"selectedCategory\": $selectedCategory, \"list1\": $lists[0], \"list2\": $lists[1], \"list3\": $lists[2], \"list4\": $lists[3] }";
+            return "{ \"user\": $user, \"list1\": $lists[0], \"list2\": $lists[1], \"list3\": $lists[2], \"list4\": $lists[3] }";
         } else {
             terminateWithError(500, "Can't retrieve row !");
         }
@@ -112,7 +118,6 @@ function getWorkspace($workspace) {
     }
 
     mysql_free_result($searchResult);
-    mysql_close($linkDb);
 }
 
 function processLine($ll) {
@@ -142,15 +147,14 @@ function processLine($ll) {
 }
 
 function getWorkspaces() {
-
+    global $user;
     $ws = array();
 
-    $searchSql = "SELECT * FROM workspaces ORDER BY workspace";
+    $searchSql = "SELECT * FROM workspaces WHERE (user=\"$user\" OR user=\"public\") ORDER BY workspace";
     $searchResult = mysql_query($searchSql) or terminateWithError(500, "Error in SQL : " . $searchSql);
 
     if ($searchResult) {
         while ($line = mysql_fetch_assoc($searchResult)) {
-
             array_push($ws, $line['workspace']);
         }
     }

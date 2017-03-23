@@ -66,7 +66,7 @@ AnotherTodoList.initializeEvent = function() {
 AnotherTodoList.activeItemsEvent = function(e) {
 
 	// Keep current category selected in memory
-	AnotherTodoList.selectedCategory = this.id;
+	AnotherTodoList.user = this.id;
 
 	AnotherTodoList.swapCategory();
 
@@ -84,7 +84,7 @@ AnotherTodoList.activeItemsEvent = function(e) {
  */
 AnotherTodoList.addItem = function(parentList) {
 
-	var newItem = new Element('li', { 'class': 'item active ' + AnotherTodoList.selectedCategory}).update(i18n.newItemValue);
+	var newItem = new Element('li', { 'class': 'item active ' + AnotherTodoList.user}).update(i18n.newItemValue);
 
 	// Add event
 	AnotherTodoList.addListenerOnItem(newItem);
