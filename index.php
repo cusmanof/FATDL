@@ -24,6 +24,7 @@
                 <div id="toolbar">
                     <?php
                     require_once("php/db.inc.php");
+                    echo 'logged in as ' . $user;
                     echo '<form action="application.php" method="get">';
                     $ww = getWorkspaces($user);
                     echo "Workspaces : ";
