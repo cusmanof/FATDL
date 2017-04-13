@@ -71,10 +71,10 @@ AnotherTodoList.activeItemsEvent = function(e) {
 	AnotherTodoList.swapCategory();
 
 	// Toggle class name for each items.
-	$$("li").each( function(item) {
-		item.toggleClassName("active");
-		item.toggleClassName("inactive");
-	} );
+//	$$("li").each( function(item) {
+//		item.toggleClassName("active");
+//		item.toggleClassName("inactive");
+//	} );
 
 	Event.stop(e);
 }

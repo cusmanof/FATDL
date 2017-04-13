@@ -173,23 +173,23 @@ AnotherTodoList.selectCategory = function () {
         return;
     }
     $$('a.action.select').each(function (link) {
-        if (link.id == AnotherTodoList.user) {
-            link.addClassName("active");
-            link.removeClassName("inactive");
-        } else {
-            link.addClassName("inactive");
-            link.removeClassName("active");
-        }
+//        if (link.id == AnotherTodoList.user) {
+//            link.addClassName("active");
+//            link.removeClassName("inactive");
+//        } else {
+//            link.addClassName("inactive");
+//            link.removeClassName("active");                        
+//        }
     });
 
     $$('div.area h2').each(function (title) {
-        if (title.hasClassName(AnotherTodoList.user)) {
-            title.addClassName("active");
-            title.removeClassName("inactive");
-        } else {
-            title.addClassName("inactive");
-            title.removeClassName("active");
-        }
+//        if (title.hasClassName(AnotherTodoList.user)) {
+//            title.addClassName("active");
+//            title.removeClassName("inactive");
+//        } else {
+//            title.addClassName("inactive");
+//            title.removeClassName("active");
+//        }
     });
 
 }
@@ -199,16 +199,16 @@ AnotherTodoList.selectCategory = function () {
  * Swap between the 2 categories (active the first & inactivate the second and so on).
  */
 AnotherTodoList.swapCategory = function () {
-    // Change CSS classes on links
-    $$('a.action.select').each(function (link) {
-        link.toggleClassName("active");
-        link.toggleClassName("inactive");
-    });
-    // Change CSS classes on titles
-    $$('div.area h2').each(function (title) {
-        title.toggleClassName("active");
-        title.toggleClassName("inactive");
-    });
+//    // Change CSS classes on links
+//    $$('a.action.select').each(function (link) {
+//        link.toggleClassName("active");
+//        link.toggleClassName("inactive");
+//    });
+//    // Change CSS classes on titles
+//    $$('div.area h2').each(function (title) {
+//        title.toggleClassName("active");
+//        title.toggleClassName("inactive");
+//    });
 }
 
 /**

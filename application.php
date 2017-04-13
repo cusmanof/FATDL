@@ -39,23 +39,19 @@ if (isset($_GET['workspace'])) {
             Welcome to Another To-do List !
         </div>
         <div id="first" class="area top left">
-            <h2 class="perso">Category 1</h2>
-            <h2 class="pro inactive">Category 1</h2>
+            <h2 class="perso active">Category 1</h2>
             <ul id="firstlist"></ul>
         </div>
         <div id="second" class="area top right">
-            <h2 class="perso">Category 2</h2>
-            <h2 class="pro inactive">Category 2</h2>
+            <h2 class="perso active">Category 2</h2>
             <ul id="secondlist"></ul>
         </div>
         <div id="third" class="area bottom left">
-            <h2 class="perso">Category 3</h2>
-            <h2 class="pro inactive">Category 3</h2>
+            <h2 class="perso active">Category 3</h2>
             <ul id="thirdlist"></ul>
         </div>
         <div id="fourth" class="area bottom right">
-            <h2 class="perso">Category 4</h2>
-            <h2 class="pro inactive">Category 4</h2>
+            <h2 class="perso active">Category 4</h2>
             <ul id="fourthlist"></ul>
         </div>
         <span id="areaActions" style="display: none;">

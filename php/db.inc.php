@@ -114,7 +114,7 @@ function getWorkspace($workspace) {
     } else if ($searchResult && mysql_num_rows($searchResult) > 1) {
         terminateWithError(500, "More than 1 row exists in database with that workspace name ! Some data may be corrupted !");
     } else {
-        terminateWithError(404, "Not found !");
+//        terminateWithError(404, "Not found !");
     }
 
     mysql_free_result($searchResult);
